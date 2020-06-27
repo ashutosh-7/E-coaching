@@ -1,4 +1,4 @@
-# E-coaching
+#Deploying to Heroku
 
 Deploying to Heroku
 ```
