@@ -1,0 +1,2 @@
+const path =require('path');
+module.exports = path.dirname(process.mainModule.filename);   ///ye hum esliye use karte hai ki apne app ki root directory define kar ske,,,,bbar baar poora path likhne ki jarurat nhi hai
