@@ -2,7 +2,8 @@ const express = require('express');
 const path = require('path');
 const rootDir = require('./util/path.js');
 const bodyParser =require('body-parser');
-
+const authRoutes = require('./routes/auth');
+const errorControllers = require('./controllers/error');
 
 const app=express();
 
@@ -13,9 +14,8 @@ app.set('view engine','ejs');  //express ko batata hai hum by deafult kaun sa te
 app.set('views','views'); 
 
 
-app.use((req,res,next)=> {
-    res.send('<h1>hello from express</h1>')
-});
+app.use(authRoutes);
+app.use(errorControllers.get404);
 
 
 
