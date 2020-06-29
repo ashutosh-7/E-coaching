@@ -3,6 +3,7 @@ const User = require('../models/User');
 
 
 exports.getLogin =(req,res,next)=> {
+        console.log(req.session.isLoggedIn);
         res.render('auth/login',{
         pageTitle:'Login',
     });
@@ -115,7 +116,7 @@ exports.postRegister =(req,res,next)=> {
 exports.postLogin = (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
-    console.log(req.session);
+    console.log(req.session.isLoggedIn);
      User.findOne({ email: email })
       .then(user => {
         if (!user) {
@@ -131,12 +132,12 @@ exports.postLogin = (req, res, next) => {
               
               return req.session.save(err => {
                 console.log(err);
-                console.log(req.session);
+                console.log(req.session.user);
                 res.redirect('/');
               });
             }
             req.flash('error_msg','Wrong Password.');
-            return res.redirect('/login');
+            res.redirect('/login');
           })
           .catch(err => {
             console.log(err);

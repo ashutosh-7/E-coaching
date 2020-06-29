@@ -41,8 +41,11 @@ app.use(
       secret: 'secret', //used to sign the hashed
       resave: false,
       saveUninitialized: false,
-      store:store
-      //cookie:{}
+      store:store,
+      // cookie: {
+      //   maxAge: 1000*60 // 1 min
+      // },
+      
     })
   );
 
@@ -55,7 +58,7 @@ app.use(function(req, res, next) {
     res.locals.success_msg = req.flash('success_msg');
     res.locals.error_msg = req.flash('error_msg');
     res.locals.error = req.flash('error');
-    res.locals.isAuthenticated = req.session.isLoggedin;
+    res.locals.isAuthenticated = req.session.isLoggedIn;
     res.locals.csrfToken = req.csrfToken();
     next();
   });
