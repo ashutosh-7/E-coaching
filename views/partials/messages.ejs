@@ -1,8 +1,10 @@
-<% if(typeof errors !='undefined') {%>
 
-    <%for(error of errors) { %>
-    <%= error.msg %>
-    <% } %>
+<% if(success_msg !='undefined') {%>
+     <strong>  <%= success_msg %></strong> 
+<% } %>
+
+<% if(error_msg !='undefined') {%>
+    <strong>  <%= error_msg %></strong>
 
 <% } %>
 

@@ -18,13 +18,8 @@ exports.getRegister =(req,res,next)=> {
 
 
 
-exports.postLogin =(req,res,next)=> {
-    
-}; 
-
-
-
 exports.postRegister =(req,res,next)=> {
+
 
     const name=req.body.name;
     const email=req.body.email;
@@ -84,7 +79,8 @@ exports.postRegister =(req,res,next)=> {
                     email,
                     password
                 });
-
+                
+                //hasing password and saving user in database
                 bcrypt.genSalt(10,(err,salt)=>{
                     bcrypt.hash(newUser.password,salt,(err,hash)=> {
                         if(err)
@@ -94,6 +90,7 @@ exports.postRegister =(req,res,next)=> {
 
                         newUser.save()
                         .then(user => {
+                            req.flash('success_msg','You are registered Successfully!');
                             res.redirect('/login');
                         })
                         .catch(err=> {
@@ -112,3 +109,49 @@ exports.postRegister =(req,res,next)=> {
     
     
 }; 
+
+
+
+exports.postLogin = (req, res, next) => {
+    const email = req.body.email;
+    const password = req.body.password;
+    console.log(req.session);
+     User.findOne({ email: email })
+      .then(user => {
+        if (!user) {
+          req.flash('error_msg','This is not registerd email Id.');
+          return res.redirect('/login');
+        }
+        bcrypt
+          .compare(password, user.password)
+          .then(doMatch => {
+            if (doMatch) {
+              req.session.isLoggedIn = true;
+              req.session.user = user;
+              
+              return req.session.save(err => {
+                console.log(err);
+                console.log(req.session);
+                res.redirect('/');
+              });
+            }
+            req.flash('error_msg','Wrong Password.');
+            return res.redirect('/login');
+          })
+          .catch(err => {
+            console.log(err);
+            req.flash('error_msg','Something wrong happened , please retry again.');
+            res.redirect('/login');
+          });
+      })
+      .catch(err => console.log(err));
+
+  };
+  
+
+  exports.postLogout = (req, res, next) => {
+    req.session.destroy(err => {
+      console.log(err);
+      res.redirect('/login');
+    });
+  };

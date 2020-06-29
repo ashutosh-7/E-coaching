@@ -17,4 +17,24 @@ form {
 }
 .centered {
     text-align: center;
+    display: block;
   }
+
+  .cardCustom {
+    margin: 0 auto; 
+    float: none; 
+    margin-bottom: 50px; 
+    display: flex;
+  justify-content: center;
+  flex-direction: row;
+  
+}
+
+.cardHeader{
+  font-size: 2rem;
+  font-weight: bold;
+  color: black;
+}
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(240, 9, 9, 0.2);
+}

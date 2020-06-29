@@ -1,0 +1,35 @@
+<%- include('./includes/head.ejs') %>
+<body>
+
+    <%- include('./includes/navigation.ejs') %>
+
+    <div class="card-deck" style="margin-top: 6rem;">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-5">
+            <div class="card text-center text-white bg-primary mb-3 centered cardCustom" style="max-width: 20rem;">
+                <div class="card-header cardHeader">Are you a Student?</div>
+                <div class="card-body">
+                  <a href="/login" class="card-title"><button type="submit"class="btn btn-success">Login For students</button></a>
+                  <p class="card-text" style="color: black;font-weight: bold;">If you are not registerd please sign-up first.</p>
+                  <a href="/register" class="card-title"><button type="submit"class="btn btn-success">Signup For students</button></a>
+                </div>
+              </div>
+        </div>
+        <div class="col-sm-5">
+            <div class="card text-center text-white bg-success mb-3 centered" style="max-width: 20rem;">
+                <div class="card-header cardHeader">Are you a Teacher?</div>
+                <div class="card-body">
+                    <a href class="card-title"><button type="submit" class="btn btn-info">Login For Teachers</button></a>
+                    <p class="card-text" style="color: black;font-weight: bold;">If you are not registerd please sign-up first.</p>
+                    <a href="/register" class="card-title"><button type="submit"class="btn btn-info">Signup For Teachers</button></a>
+                </div>
+              </div>
+        </div>
+      </div>
+    
+   
+     
+      
+     
+
+<%- include('./includes/end.ejs') %></body>

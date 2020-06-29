@@ -24,6 +24,7 @@
     <input type="text" id="name" class="form-control mb-4" placeholder="Name" name="name" value="<%= typeof name !='undefined' ? name:'' %>" required>
     <input type="email" id="email" class="form-control mb-4" placeholder="E-mail" name="email" value="<%= typeof email !='undefined' ? email:'' %>" required>
     <input type="password" id="password" class="form-control mb-4" placeholder="Password" name="password" value="<%= typeof password !='undefined' ? password:'' %>" required>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
     <input type="password" id="password" class="form-control mb-4" placeholder="Confirm Password" name="password2" value="<%= typeof password2 !='undefined' ? password2:'' %>" required>
     <button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
 
