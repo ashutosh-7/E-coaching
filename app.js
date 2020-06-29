@@ -10,6 +10,7 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 const csrf= require('csurf');
 const authRoutes = require('./routes/auth');
 const indexRoutes = require('./routes/index');
+const studentRoutes = require('./routes/student');
 
 const app=express();
 const csrfProtection = csrf();
@@ -67,6 +68,7 @@ app.use(function(req, res, next) {
 
 app.use(authRoutes);
 app.use(indexRoutes);
+app.use(studentRoutes);
 app.use(errorControllers.get404);
 
 

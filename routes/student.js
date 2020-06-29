@@ -1,9 +1,9 @@
-// const express= require('express');
-// const studentController = require('../controllers/student');
+const express= require('express');
+const studentController = require('../controllers/student');
+const auth= require('../middlewares/is-auth');
+const router= express.Router();
 
-// const router= express.Router();
 
+router.get('/home',auth,studentController.getHome);
 
-// router.get('/',studentController.index);
-
-// model.exports = router;
+module.exports = router;
