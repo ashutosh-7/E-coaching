@@ -1,6 +1,6 @@
 const express= require('express');
 const indexController = require('../controllers/index');
-const auth = require('../middlewares/is-auth');
+const authSuccess= require('../middlewares/studentAuth/studentAuthSuccess');
 
 const router= express.Router();
 

@@ -8,9 +8,10 @@ const flash=require('connect-flash');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const csrf= require('csurf');
-const authRoutes = require('./routes/auth');
+const studentAuthRoutes = require('./routes/student/studentAuth');
 const indexRoutes = require('./routes/index');
-const studentRoutes = require('./routes/student');
+const studentRoutes = require('./routes/student/student');
+const teacherRoutes = require('./routes/teacher/teacher');
 
 const app=express();
 const csrfProtection = csrf();
@@ -66,9 +67,10 @@ app.use(function(req, res, next) {
 
 
 
-app.use(authRoutes);
+app.use(studentAuthRoutes);
 app.use(indexRoutes);
 app.use(studentRoutes);
+app.use(teacherRoutes);
 app.use(errorControllers.get404);
 
 

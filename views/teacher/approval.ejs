@@ -1,0 +1,32 @@
+<%- include('../includes/head.ejs') %>
+<body>
+
+    <%- include('../includes/navigation.ejs') %>
+
+
+<!-- <% if(error_msg !='undefined') {%>
+    <strong>  <%= error_msg %></strong>
+
+<% } %> -->
+
+<div class="card" style="width:auto;border: none;text-align: center;">
+    <div class="card-body">
+<form class="text-center   p-5" style="width:20rem;text-align: center;" action="/approval" method="POST">
+
+    <p class="h4 mb-4">Check status</p>
+
+    <input type="text" id="userId" class="form-control mb-4" placeholder="User Id" name="userId" required>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <button class="btn btn-info btn-block my-4" type="submit">Check status</button>
+
+    <p>Go to Index Page?
+        <a href="/">Index</a>
+    </p>
+
+
+</form>
+</div>
+</div>
+
+
+<%- include('../includes/end.ejs') %>
