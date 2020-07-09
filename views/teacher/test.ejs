@@ -1,0 +1,29 @@
+<%- include('../includes/head.ejs') %>
+<body>
+
+    <%- include('../includes/navigation.ejs') %>
+  
+<div class="card" style="width:auto;border: none;text-align: center;">
+    <div class="card-body">
+<form class="text-center   p-5" style="width:20rem;text-align: center;" enctype="multipart/form-data" action="/test" method="POST">
+    
+    
+
+    <p class="h4 mb-4">Sign up</p>
+    
+    <input type="text" id="name" class="form-control mb-4" placeholder="Name" name="name" value="<%= typeof name !='undefined' ? name:'' %>" required>
+   
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <input type="password" id="password" class="form-control mb-4" placeholder="Confirm Password" name="password2" value="<%= typeof password2 !='undefined' ? password2:'' %>" required>
+    <input type="file" name="image">
+    <button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
+
+    
+
+</form>
+</div>
+</div>
+
+
+
+<%- include('../includes/end.ejs') %>

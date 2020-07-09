@@ -3,15 +3,21 @@ const User = require('../../models/User');
 
 
 exports.getLogin =(req,res,next)=> {
-        console.log(req.session.isLoggedIn);
-        res.render('auth/login',{
+        // console.log(req.session.isLoggedIn);
+        if(req.session.isLoggedIn)
+        {
+            res.render('student/home/',{
+                pageTitle:'Home',
+            });
+        }
+        res.render('student/auth/login',{
         pageTitle:'Login',
     });
 
 }; 
 
 exports.getRegister =(req,res,next)=> {
-    res.render('auth/register',{
+    res.render('student/auth/register',{
         pageTitle:'Register',
     });
     

@@ -12,6 +12,7 @@ const studentAuthRoutes = require('./routes/student/studentAuth');
 const indexRoutes = require('./routes/index');
 const studentRoutes = require('./routes/student/student');
 const teacherRoutes = require('./routes/teacher/teacher');
+const multer = require('multer');
 
 const app=express();
 const csrfProtection = csrf();
@@ -31,11 +32,40 @@ const store= new MongoDBStore({
   collection:'sessions',
 });
 
+const fileStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'images');
+  },
+  filename: (req, file, cb) => {
+    cb(null, new Date().toISOString() + '-' + file.originalname);
+  }
+});
+
+const fileFilter = (req, file, cb) => {
+  if (
+    file.mimetype === 'image/png' ||
+    file.mimetype === 'image/jpg' ||
+    file.mimetype === 'image/jpeg'||
+    file.mimetype === 'file/pdf.'
+  ) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+    // cb(new Error('I don\'t have a clue!'))
+  }
+};
+
 app.use(bodyParser.json());  //we are dealing with json
 app.use(bodyParser.urlencoded({extended : false})); //parsing the post request datas
 app.use(express.static(path.join(rootDir,'public'))); //including public folder accesseible like css and other stuffs in public folder are now accessible
 app.set('view engine','ejs');  //express ko batata hai hum by deafult kaun sa templating engine use kar rahe
 app.set('views','views'); 
+
+app.use(multer({ storage: fileStorage, fileFilter: fileFilter }).single('image'));
+
+app.use('/images', express.static(path.join(__dirname, 'images')));
+
+
 
 //express session middlewares
 app.use(
