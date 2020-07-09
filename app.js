@@ -12,6 +12,7 @@ const studentAuthRoutes = require('./routes/student/studentAuth');
 const indexRoutes = require('./routes/index');
 const studentRoutes = require('./routes/student/student');
 const teacherRoutes = require('./routes/teacher/teacher');
+const teacherAuthRoutes = require('./routes/teacher/teacherAuth');
 const multer = require('multer');
 
 const app=express();
@@ -61,9 +62,9 @@ app.use(express.static(path.join(rootDir,'public'))); //including public folder 
 app.set('view engine','ejs');  //express ko batata hai hum by deafult kaun sa templating engine use kar rahe
 app.set('views','views'); 
 
-app.use(multer({ storage: fileStorage, fileFilter: fileFilter }).single('image'));
+app.use(multer({ storage: fileStorage, fileFilter: fileFilter }).single('resume'));
 
-app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/images', express.static(path.join(rootDir, 'images')));
 
 
 
@@ -91,18 +92,24 @@ app.use(function(req, res, next) {
     res.locals.error_msg = req.flash('error_msg');
     res.locals.error = req.flash('error');
     res.locals.isAuthenticated = req.session.isLoggedIn;
+    res.locals.isTeacher = req.session.isTeacherLoggedIn;
     res.locals.csrfToken = req.csrfToken();
     next();
   });
 
 
+app.use(indexRoutes);
 
 app.use(studentAuthRoutes);
-app.use(indexRoutes);
 app.use(studentRoutes);
+
+app.use(teacherAuthRoutes);
 app.use(teacherRoutes);
+
+
+
+
+
 app.use(errorControllers.get404);
-
-
 
 app.listen(process.env.PORT || 3000);

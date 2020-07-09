@@ -16,16 +16,19 @@ const teacherSchema = new Schema ({
         type:String,
         required:true,
     },
+    linkdinUrl: {
+        type:String,
+        required:false,
+    },
+    resumeUrl: {
+        type:String,
+        required:true,
+    },
     date: {
         type: Date,
         default: Date.now
       }
    
-    
-
-
-
-
 });
 
 const Teacher = mongoose.model('Teacher',teacherSchema);

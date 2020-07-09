@@ -1,13 +1,14 @@
 const express= require('express');
 const router= express.Router();
 const authController = require('../../controllers/student/studentAuth');
-const authSuccess= require('../../middlewares/studentAuth/studentAuthSuccess');
+const isAuth= require('../../middlewares/studentAuth/isAuth');
+const isCheck= require('../../middlewares/studentAuth/isCheck');
 
-router.get('/login',authController.getLogin);
-router.post('/login',authController.postLogin);
-router.get('/register',authController.getRegister);
-router.post('/register',authController.postRegister);
-router.post('/logout',authSuccess,authController.postLogout);
+router.get('/login',isCheck,authController.getLogin);
+router.post('/login',isCheck,authController.postLogin);
+router.get('/register',isCheck,authController.getRegister);
+router.post('/register',isCheck,authController.postRegister);
+router.post('/logout',isAuth,authController.postLogout);
 
 
 
