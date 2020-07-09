@@ -13,7 +13,10 @@ const indexRoutes = require('./routes/index');
 const studentRoutes = require('./routes/student/student');
 const teacherRoutes = require('./routes/teacher/teacher');
 const teacherAuthRoutes = require('./routes/teacher/teacherAuth');
+const admin = require('./routes/admin/admin');
+const Admin = require('./models/Admin');
 const multer = require('multer');
+const bcrypt = require('bcryptjs');
 
 const app=express();
 const csrfProtection = csrf();
@@ -94,10 +97,40 @@ app.use(function(req, res, next) {
     res.locals.error = req.flash('error');
     res.locals.isAuthenticated = req.session.isLoggedIn;
     res.locals.isTeacher = req.session.isTeacherLoggedIn;
+    res.locals.isAdmin = req.session.isAdminLoggedIn;
     res.locals.csrfToken = req.csrfToken();
     next();
   });
 
+  //creating dummy admin
+
+  // app.use('/admin/register',(req,res,next)=> {
+  //   const username="Denied";
+  //   const password="123";
+  //   const newAdmin =new Admin({
+  //     username,
+  //     password
+  //   });
+
+  //     bcrypt.genSalt(10,(err,salt)=>{
+  //     bcrypt.hash(newAdmin.password,salt,(err,hash)=> {
+  //         if(err)
+  //         throw err;
+
+  //         newAdmin.password=hash;
+
+  //         newAdmin.save()
+  //         .then(user => {
+              
+  //             res.redirect('/');
+  //         })
+  //         .catch(err=> {
+  //             console.log(err);
+  //         });
+  //     })
+  // })
+
+  // });
 
 app.use(indexRoutes);
 
@@ -106,6 +139,8 @@ app.use(studentRoutes);
 
 app.use(teacherAuthRoutes);
 app.use(teacherRoutes);
+
+app.use(admin);
 
 
 
